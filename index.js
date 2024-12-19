@@ -14,8 +14,7 @@ async function getJsonFiles() {
 async function createBackup(filesList) {
     filesList.forEach(async (file) => {
         const { dir, name } = path.parse(file);
-        const fd = await fs.open(`${dir}/${name}.bak`, 'w');
-        fd.close();
+        await fs.copyFile(file, `${dir}/${name}.bak`)
     });
 }
 
